@@ -7,9 +7,23 @@
   "rules": {
     "quotemark": [true, "single"],
     "indent": [true, "spaces", 4],
-    "interface-name": false,
+    "interface-name": [true, "always-prefix"],
     "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "no-consecutive-blank-lines": false
+    "no-consecutive-blank-lines": false,
+    "member-ordering": [true, {"order": "fields-first"}],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ],
+    "no-empty-interface": false,
+    "interface-over-type-literal": true,
+    "no-console": [false],
+    "member-access": false,
+    "array-type": [true, "array"],
+    "callable-types": false
   }
 }
