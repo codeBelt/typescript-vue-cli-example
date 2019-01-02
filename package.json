@@ -16,6 +16,10 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "axios": "0.18.0",
+    "localforage": "1.7.3",
+    "sjs-base-model": "1.5.2",
+    "uuid": "3.3.2",
     "vue": "2.5.21",
     "vue-class-component": "6.0.0",
     "vue-property-decorator": "7.0.0",
@@ -24,6 +28,8 @@
   },
   "devDependencies": {
     "@types/jest": "23.1.4",
+    "@types/localforage": "0.0.34",
+    "@types/uuid": "3.4.4",
     "@vue/cli-plugin-babel": "3.2.0",
     "@vue/cli-plugin-e2e-cypress": "3.2.0",
     "@vue/cli-plugin-typescript": "3.2.0",
