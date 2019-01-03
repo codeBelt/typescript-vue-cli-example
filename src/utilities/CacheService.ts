@@ -15,11 +15,7 @@ export default class CacheService {
         return this.namespace;
     }
 
-    constructor(
-        durationInSeconds: number = 0,
-        unit: string = CacheService.SECONDS,
-        namespace: string = 'CacheService.'
-    ) {
+    constructor(durationInSeconds: number = 0, unit: string = CacheService.SECONDS, namespace: string = 'CacheService.') {
         this._namespace = namespace;
 
         switch (unit) {
@@ -43,9 +39,7 @@ export default class CacheService {
     public async get(key: string): Promise<ICache> {
         try {
             const {value, expiration}: ICache = await this._getItem(key);
-            const hasTimestampExpired: boolean = this._hasTimestampExpired(
-                expiration
-            );
+            const hasTimestampExpired: boolean = this._hasTimestampExpired(expiration);
 
             return {
                 value,
@@ -79,13 +73,9 @@ export default class CacheService {
         try {
             let allKeys: string[] = await this._getKeys();
 
-            allKeys = allKeys.filter((key: string) =>
-                key.startsWith(this._namespace)
-            );
+            allKeys = allKeys.filter((key: string) => key.startsWith(this._namespace));
 
-            await Promise.all(
-                allKeys.map(async (key: string) => this._removeItem(key))
-            );
+            await Promise.all(allKeys.map(async (key: string) => this._removeItem(key)));
         } catch (error) {
             return this._onError(error);
         }
@@ -105,12 +95,8 @@ export default class CacheService {
         const timestampInMilliseconds: number = expiration;
         const todayInMilliseconds: number = this._todayInMilliseconds();
 
-        const timestampDifferenceInSeconds: number = differenceInSeconds(
-            todayInMilliseconds,
-            timestampInMilliseconds
-        );
-        const timeRemainingInSeconds: number =
-            this._durationInSeconds - timestampDifferenceInSeconds;
+        const timestampDifferenceInSeconds: number = differenceInSeconds(todayInMilliseconds, timestampInMilliseconds);
+        const timeRemainingInSeconds: number = this._durationInSeconds - timestampDifferenceInSeconds;
 
         if (timeRemainingInSeconds <= 0) {
             return true;
@@ -130,9 +116,7 @@ export default class CacheService {
     }
 
     private _createCacheKey(key: string): string {
-        return key.startsWith(this._namespace)
-            ? key
-            : `${this._namespace}${key}`;
+        return key.startsWith(this._namespace) ? key : `${this._namespace}${key}`;
     }
 
     private async _getItem(key: string): Promise<ICache> {

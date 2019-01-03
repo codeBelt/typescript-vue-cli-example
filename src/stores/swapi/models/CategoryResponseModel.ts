@@ -8,13 +8,7 @@ import StarshipModel from './StarshipModel';
 import VehicleModel from './VehicleModel';
 import CategoryEnum from '../../../constants/CategoryEnum';
 
-export type SwapiModelUnion =
-    | FilmModel
-    | PersonModel
-    | PlanetModel
-    | SpeciesModel
-    | StarshipModel
-    | VehicleModel;
+export type SwapiModelUnion = FilmModel | PersonModel | PlanetModel | SpeciesModel | StarshipModel | VehicleModel;
 
 /*
     // Returned Api Data Sample
@@ -36,11 +30,7 @@ export default class CategoryResponseModel<T> extends BaseModel {
      */
     public category: CategoryEnum = null;
 
-    constructor(
-        data: Partial<CategoryResponseModel<T>>,
-        Model: IConstructor<T>,
-        category: CategoryEnum
-    ) {
+    constructor(data: Partial<CategoryResponseModel<T>>, Model: IConstructor<T>, category: CategoryEnum) {
         super();
 
         this.results = [Model as any];

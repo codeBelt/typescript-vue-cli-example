@@ -69,9 +69,6 @@ export default class FilmModel extends BaseModel {
         this.name = this.title;
         this.people = this.characters;
         this.imageUrl = `/images/${this.category}/${this.id}.jpg`;
-        this.neededCategoryIds = SwapiUtility.getIdsForCategories(
-            this,
-            CategoryEnum
-        );
+        this.neededCategoryIds = SwapiUtility.getIdsForCategories(this, CategoryEnum);
     }
 }

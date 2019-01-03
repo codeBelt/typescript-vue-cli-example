@@ -28,9 +28,7 @@ export default class HttpUtility {
 
     public async cacheGet(endpoint: string): Promise<AxiosResponse<any>> {
         const cacheKey: string = uuidV3(endpoint, uuidV3.URL);
-        const hasTimestampExpired: boolean = await this._cacheService.hasTimestampExpiredFor(
-            cacheKey
-        );
+        const hasTimestampExpired: boolean = await this._cacheService.hasTimestampExpiredFor(cacheKey);
 
         if (hasTimestampExpired) {
             const response: AxiosResponse = await this.get(endpoint);
@@ -80,10 +78,7 @@ export default class HttpUtility {
         return this._fetch(request);
     }
 
-    private async _fetch(
-        request: Request,
-        init?: any
-    ): Promise<AxiosResponse<any>> {
+    private async _fetch(request: Request, init?: any): Promise<AxiosResponse<any>> {
         try {
             const axiosResponse: AxiosResponse = await axios({
                 data: init,

@@ -70,21 +70,14 @@ export default class StringUtility {
     }
 
     public static toTitleCase(str: string): string {
-        return StringUtility.toSentence(str).replace(
-            /\w\S*/g,
-            (txt: string) => {
-                return (
-                    txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-                );
-            }
-        );
+        return StringUtility.toSentence(str).replace(/\w\S*/g, (txt: string) => {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     }
 
     public static toSentenceCase(str: string): string {
         const sentence: string = StringUtility.toSentence(str);
 
-        return (
-            sentence.charAt(0).toUpperCase() + sentence.substr(1).toLowerCase()
-        );
+        return sentence.charAt(0).toUpperCase() + sentence.substr(1).toLowerCase();
     }
 }

@@ -61,9 +61,6 @@ export default class PlanetModel extends BaseModel {
         this.id = SwapiUtility.getIdFromUrl(this.url);
         this.people = this.residents;
         this.imageUrl = `/images/${this.category}/${this.id}.jpg`;
-        this.neededCategoryIds = SwapiUtility.getIdsForCategories(
-            this,
-            CategoryEnum
-        );
+        this.neededCategoryIds = SwapiUtility.getIdsForCategories(this, CategoryEnum);
     }
 }

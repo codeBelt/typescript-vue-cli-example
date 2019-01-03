@@ -27,9 +27,7 @@ export default class SwapiUtility {
     /**
      * Returns a model by category passed in.
      */
-    public static getModelForCreation(
-        category: CategoryEnum
-    ): IConstructor<SwapiModelUnion> {
+    public static getModelForCreation(category: CategoryEnum): IConstructor<SwapiModelUnion> {
         const map: {[categoryEnum: string]: IConstructor<SwapiModelUnion>} = {
             [CategoryEnum.People]: PersonModel,
             [CategoryEnum.Planets]: PlanetModel,
@@ -42,22 +40,14 @@ export default class SwapiUtility {
         return map[category];
     }
 
-    public static getIdsForCategories(
-        model: SwapiModelUnion,
-        categories: typeof CategoryEnum
-    ): INeededCategoryIds {
-        return Object.values(categories).reduce(
-            (map: INeededCategoryIds, category: string) => {
-                if (model.hasOwnProperty(category) && model[category].length) {
-                    map[category] = model[category].map((apiUrl: string) =>
-                        SwapiUtility.getIdFromUrl(apiUrl)
-                    );
-                }
+    public static getIdsForCategories(model: SwapiModelUnion, categories: typeof CategoryEnum): INeededCategoryIds {
+        return Object.values(categories).reduce((map: INeededCategoryIds, category: string) => {
+            if (model.hasOwnProperty(category) && model[category].length) {
+                map[category] = model[category].map((apiUrl: string) => SwapiUtility.getIdFromUrl(apiUrl));
+            }
 
-                return map;
-            },
-            {}
-        );
+            return map;
+        }, {});
     }
 
     /**
@@ -68,54 +58,34 @@ export default class SwapiUtility {
      * Take those endpoints for each category on the model and create an array of ids.
      * Now filter any ids out that we currently have in the swapiReducer because we don't need to load them again.
      */
-    public static getCategoryIdsForDetails(
-        model: SwapiModelUnion,
-        swapiReducer: ISwapiReducerState
-    ): INeededCategoryIds {
-        return Object.values(CategoryEnum).reduce(
-            (list: INeededCategoryIds, categoryPropertyName: CategoryEnum) => {
-                const categoryEndpoints: string[] = model[categoryPropertyName];
+    public static getCategoryIdsForDetails(model: SwapiModelUnion, swapiReducer: ISwapiReducerState): INeededCategoryIds {
+        return Object.values(CategoryEnum).reduce((list: INeededCategoryIds, categoryPropertyName: CategoryEnum) => {
+            const categoryEndpoints: string[] = model[categoryPropertyName];
 
-                if (categoryEndpoints && categoryEndpoints.length) {
-                    const currentCategoryIds: string[] = get(
-                        swapiReducer[categoryPropertyName],
-                        'entity.ids',
-                        []
-                    );
+            if (categoryEndpoints && categoryEndpoints.length) {
+                const currentCategoryIds: string[] = get(swapiReducer[categoryPropertyName], 'entity.ids', []);
 
-                    list[categoryPropertyName] = categoryEndpoints
-                        .map((endpoint: string) =>
-                            SwapiUtility.getIdFromUrl(endpoint)
-                        )
-                        .filter(
-                            (id: string) =>
-                                currentCategoryIds.includes(id) === false
-                        );
-                }
+                list[categoryPropertyName] = categoryEndpoints
+                    .map((endpoint: string) => SwapiUtility.getIdFromUrl(endpoint))
+                    .filter((id: string) => currentCategoryIds.includes(id) === false);
+            }
 
-                return list;
-            },
-            {}
-        );
+            return list;
+        }, {});
     }
 
-    public static getDetailRequests(
-        data: INeededCategoryIds
-    ): IDetailsRequest[] {
-        return Object.entries(data).reduce(
-            (list: IDetailsRequest[], [category, ids]: [string, string[]]) => {
-                const categoryList: IDetailsRequest[] = ids.map(
-                    (id: string): IDetailsRequest => {
-                        return {
-                            category: category as CategoryEnum,
-                            itemId: id,
-                        };
-                    }
-                );
+    public static getDetailRequests(data: INeededCategoryIds): IDetailsRequest[] {
+        return Object.entries(data).reduce((list: IDetailsRequest[], [category, ids]: [string, string[]]) => {
+            const categoryList: IDetailsRequest[] = ids.map(
+                (id: string): IDetailsRequest => {
+                    return {
+                        category: category as CategoryEnum,
+                        itemId: id,
+                    };
+                }
+            );
 
-                return [...list, ...categoryList];
-            },
-            []
-        );
+            return [...list, ...categoryList];
+        }, []);
     }
 }
