@@ -3,6 +3,7 @@ import CacheService from '@/utilities/CacheService';
 import uuidV3 from 'uuid/v3';
 import ICache from '@/models/ICache';
 import PropertyNormalizerUtility from '@/utilities/PropertyNormalizerUtility';
+import environment from 'environment';
 
 export enum RequestMethod {
     Get = 'GET',
@@ -16,7 +17,7 @@ export enum RequestMethod {
 
 // http://httpstat.us
 export default class HttpUtility {
-    private _cacheService: CacheService = new CacheService();
+    private _cacheService: CacheService = new CacheService(environment.apiCacheTime.duration, environment.apiCacheTime.unit);
 
     public async get(endpoint: string): Promise<AxiosResponse<any>> {
         const request = new Request(endpoint, {
@@ -32,8 +33,6 @@ export default class HttpUtility {
 
         if (hasTimestampExpired) {
             const response: AxiosResponse = await this.get(endpoint);
-
-            await this._cacheService.remove(cacheKey);
 
             await this._cacheService.set(cacheKey, {
                 data: response.data,
