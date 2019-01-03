@@ -1,5 +1,5 @@
-import IEntityState from '../../../models/IEntityState';
-import {SwapiModelUnion} from './CategoryResponseModel';
+import IEntityState from '@/models/IEntityState';
+import {SwapiModelUnion} from '@/stores/swapi/models/CategoryResponseModel';
 
 export default interface ILoadMoreEntity {
     readonly totalCount: number;

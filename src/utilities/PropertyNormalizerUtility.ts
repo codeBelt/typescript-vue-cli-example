@@ -1,5 +1,5 @@
 import {Util} from 'sjs-base-model';
-import StringUtility from './StringUtility';
+import StringUtility from '@/utilities/StringUtility';
 
 export default class PropertyNormalizerUtility {
     /**

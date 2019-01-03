@@ -1,4 +1,4 @@
-import ICache from '../models/ICache';
+import ICache from '@/models/ICache';
 import differenceInSeconds from 'date-fns/difference_in_seconds';
 import localforage from 'localforage';
 

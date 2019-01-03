@@ -1,12 +1,12 @@
 import {BaseModel} from 'sjs-base-model';
-import PersonModel from './PersonModel';
-import IConstructor from '../../../models/IConstructor';
-import FilmModel from './FilmModel';
-import PlanetModel from './PlanetModel';
-import SpeciesModel from './SpeciesModel';
-import StarshipModel from './StarshipModel';
-import VehicleModel from './VehicleModel';
-import CategoryEnum from '../../../constants/CategoryEnum';
+import PersonModel from '@/stores/swapi/models/PersonModel';
+import IConstructor from '@/models/IConstructor';
+import FilmModel from '@/stores/swapi/models/FilmModel';
+import PlanetModel from '@/stores/swapi/models/PlanetModel';
+import SpeciesModel from '@/stores/swapi/models/SpeciesModel';
+import StarshipModel from '@/stores/swapi/models/StarshipModel';
+import VehicleModel from '@/stores/swapi/models/VehicleModel';
+import CategoryEnum from '@/constants/CategoryEnum';
 
 export type SwapiModelUnion = FilmModel | PersonModel | PlanetModel | SpeciesModel | StarshipModel | VehicleModel;
 

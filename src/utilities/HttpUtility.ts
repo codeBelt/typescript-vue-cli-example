@@ -1,8 +1,8 @@
 import axios, {AxiosResponse} from 'axios';
-import CacheService from './CacheService';
+import CacheService from '@/utilities/CacheService';
 import uuidV3 from 'uuid/v3';
-import ICache from '../models/ICache';
-import PropertyNormalizerUtility from './PropertyNormalizerUtility';
+import ICache from '@/models/ICache';
+import PropertyNormalizerUtility from '@/utilities/PropertyNormalizerUtility';
 
 export enum RequestMethod {
     Get = 'GET',
