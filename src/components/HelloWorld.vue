@@ -43,25 +43,18 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {SwapiAction, SwapiActionEnum} from '@/stores/swapi/SwapiModule';
-import {Getter} from 'vuex-class';
+import {SwapiAction, SwapiActionEnum, SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiModule';
 
 @Component
 export default class HelloWorld extends Vue {
     @SwapiAction(SwapiActionEnum.LoadCategories) loadCategories;
-    @Getter('swapiModule/categories') categories;
+    @SwapiGetter(SwapiGetterEnum.categories) categories;
 
     @Prop() private msg!: string;
 
-    async mounted() {
-        console.log(`hey`);
-        // await this.$store.dispatch('doAsyncChangeMyProperty', 100);
-
-        await this.$store.dispatch('swapiModule/loadCategories');
-
+    mounted() {
         this.loadCategories();
 
-        console.log(`this.$store.state.swapiModule.state.categories`, this.$store.state.swapiModule.categories);
         console.log(`this.categories`, this.categories);
     }
 }

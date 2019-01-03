@@ -26,6 +26,12 @@ import SwapiService from '@/stores/swapi/SwapiService';
 export enum SwapiActionEnum {
     LoadCategories = 'loadCategories',
 }
+export enum SwapiGetterEnum {
+    categories = 'categories',
+}
+export enum SwapiMutationEnum {
+    LoadCategoriesSuccess = 'loadCategoriesSuccess',
+}
 
 const swapiState: ISwapiState = {
     currentCategory: null,
@@ -42,11 +48,11 @@ const swapiState: ISwapiState = {
 };
 
 const swapiGetters: GetterTree<ISwapiState, IRootState> = {
-    categories: (state, getters, rootState) => state.categories,
+    [SwapiGetterEnum.categories]: (state, getters, rootState) => state.categories,
 };
 
 const swapiMutations: MutationTree<ISwapiState> = {
-    loadCategoriesSuccess(state: ISwapiState, payload: ICategoriesResponse) {
+    [SwapiMutationEnum.LoadCategoriesSuccess](state: ISwapiState, payload: ICategoriesResponse) {
         state.categories = payload;
     },
 };
@@ -56,7 +62,7 @@ const swapiActions: ActionTree<ISwapiState, IRootState> = {
         try {
             const responseModel: ICategoriesResponse = await SwapiService.loadCategories();
 
-            context.commit('loadCategoriesSuccess', responseModel);
+            context.commit(SwapiMutationEnum.LoadCategoriesSuccess, responseModel);
             // context.commit(SwapiAction.loadCategoriesSuccess(responseModel));
         } catch (error) {
             console.log(`error`, error);
