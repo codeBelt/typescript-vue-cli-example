@@ -7,7 +7,7 @@ import StarshipModel from '../stores/swapi/models/StarshipModel';
 import VehicleModel from '../stores/swapi/models/VehicleModel';
 import SpeciesModel from '../stores/swapi/models/SpeciesModel';
 import FilmModel from '../stores/swapi/models/FilmModel';
-import ISwapiReducerState from '../stores/swapi/models/ISwapiReducerState';
+import ISwapiState from '../stores/swapi/models/ISwapiState';
 import get from 'lodash/get';
 import INeededCategoryIds from '../stores/swapi/models/INeededCategoryIds';
 import IDetailsRequest from '../stores/swapi/models/IDetailsRequest';
@@ -58,7 +58,7 @@ export default class SwapiUtility {
      * Take those endpoints for each category on the model and create an array of ids.
      * Now filter any ids out that we currently have in the swapiReducer because we don't need to load them again.
      */
-    public static getCategoryIdsForDetails(model: SwapiModelUnion, swapiReducer: ISwapiReducerState): INeededCategoryIds {
+    public static getCategoryIdsForDetails(model: SwapiModelUnion, swapiReducer: ISwapiState): INeededCategoryIds {
         return Object.values(CategoryEnum).reduce((list: INeededCategoryIds, categoryPropertyName: CategoryEnum) => {
             const categoryEndpoints: string[] = model[categoryPropertyName];
 
