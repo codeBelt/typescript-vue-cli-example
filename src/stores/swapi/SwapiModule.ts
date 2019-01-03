@@ -23,7 +23,7 @@ import SwapiService from '@/stores/swapi/SwapiService';
 //     persist?: boolean
 // }
 
-export enum SwapiEnum {
+export enum SwapiActionEnum {
     LoadCategories = 'loadCategories',
 }
 
@@ -52,7 +52,7 @@ const swapiMutations: MutationTree<ISwapiState> = {
 };
 
 const swapiActions: ActionTree<ISwapiState, IRootState> = {
-    async [SwapiEnum.LoadCategories](context: ActionContext<ISwapiState, IRootState>, payload: void) {
+    async [SwapiActionEnum.LoadCategories](context: ActionContext<ISwapiState, IRootState>, payload: void) {
         try {
             const responseModel: ICategoriesResponse = await SwapiService.loadCategories();
 

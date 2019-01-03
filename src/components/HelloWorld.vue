@@ -43,12 +43,12 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {SwapiAction, SwapiEnum} from '@/stores/swapi/SwapiModule';
+import {SwapiAction, SwapiActionEnum} from '@/stores/swapi/SwapiModule';
 import {Getter} from 'vuex-class';
 
 @Component
 export default class HelloWorld extends Vue {
-    @SwapiAction(SwapiEnum.LoadCategories) loadCategories;
+    @SwapiAction(SwapiActionEnum.LoadCategories) loadCategories;
     @Getter('swapiModule/categories') categories;
 
     @Prop() private msg!: string;
