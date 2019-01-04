@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
 import CategoryMenu from '@/viewcomponents/components/CategoryMenu.vue';
 import {SwapiAction, SwapiActionEnum} from '@/stores/swapi/SwapiModuleAction';
 import {SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
@@ -26,8 +26,6 @@ export default class HomeLayout extends Vue {
     @SwapiGetter(SwapiGetterEnum.currentCategory) currentCategory;
 
     @SwapiAction(SwapiActionEnum.loadCategories) loadCategories;
-
-    @Prop(String) private msg!: string;
 
     mounted() {
         this.loadCategories();

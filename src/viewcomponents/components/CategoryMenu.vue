@@ -22,7 +22,7 @@ import {SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
 export default class CategoryMenu extends Vue {
     @SwapiGetter(SwapiGetterEnum.menuItems) menuItems;
 
-    @SwapiAction(SwapiActionEnum.loadCategories) loadCategories;
+    @SwapiAction(SwapiActionEnum.loadCategory) loadCategory;
 
     cssClasses(item: ICategoryMenu): string {
         return classNames({
@@ -36,7 +36,7 @@ export default class CategoryMenu extends Vue {
         const category: CategoryEnum = target.getAttribute('data-category') as CategoryEnum;
         const apiEndpoint: string = target.getAttribute('data-endpoint');
 
-        this.loadCategories({
+        this.loadCategory({
             apiEndpoint,
             category,
         });
