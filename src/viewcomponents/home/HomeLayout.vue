@@ -12,8 +12,9 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {SwapiAction, SwapiActionEnum, SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiModule';
 import CategoryMenu from '@/viewcomponents/components/CategoryMenu.vue';
+import {SwapiAction, SwapiActionEnum} from '@/stores/swapi/SwapiActionModule';
+import {SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiGetterModule';
 
 @Component({
     components: {

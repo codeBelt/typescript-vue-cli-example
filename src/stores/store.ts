@@ -15,3 +15,20 @@ export default new Vuex.Store<IRootState>({
         swapiModule,
     },
 });
+
+// // Store
+// // export interface RootState {
+// //     count: number
+// //     todos: TodoState
+// //     login: LoginState
+// //     history: HistoryState
+// // }
+// //
+// // import { MutationPayload } from 'vuex'
+// // export interface HistoryState {
+// //     history: MutationPayload[]
+// // }
+// //
+// // export interface PluginOptions {
+// //     persist?: boolean
+// // }

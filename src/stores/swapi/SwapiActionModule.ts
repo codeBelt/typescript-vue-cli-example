@@ -1,0 +1,41 @@
+import {ActionTree, ActionContext} from 'vuex';
+import {namespace} from 'vuex-class';
+import ISwapiState from '@/stores/swapi/models/ISwapiState';
+import IRootState from '@/stores/IRootState';
+import ICategoriesResponse from '@/stores/swapi/models/ICategoriesResponse';
+import SwapiService from '@/stores/swapi/SwapiService';
+import ICategoryRequest from '@/stores/swapi/models/ICategoryRequest';
+import CategoryResponseModel, {SwapiModelUnion} from '@/stores/swapi/models/CategoryResponseModel';
+import {SwapiMutationEnum} from '@/stores/swapi/SwapiMutationModule';
+
+export const SwapiAction = namespace('swapiModule').Action;
+
+export enum SwapiActionEnum {
+    loadCategories = 'loadCategories',
+    loadCategory = 'setCurrentCategory',
+}
+
+export const swapiActionModule: ActionTree<ISwapiState, IRootState> = {
+    async [SwapiActionEnum.loadCategories](context: ActionContext<ISwapiState, IRootState>, payload: void) {
+        try {
+            const responseModel: ICategoriesResponse = await SwapiService.loadCategories();
+
+            context.commit(SwapiMutationEnum.loadCategoriesSuccess, responseModel);
+        } catch (error) {
+            console.log(`error`, error);
+        }
+    },
+    async [SwapiActionEnum.loadCategory](context: ActionContext<ISwapiState, IRootState>, payload: ICategoryRequest) {
+        const {category, apiEndpoint} = payload;
+
+        context.commit(SwapiMutationEnum.loadCategory, payload);
+
+        try {
+            const responseModel: CategoryResponseModel<SwapiModelUnion> = await SwapiService.loadCategory(apiEndpoint, category);
+
+            context.commit(SwapiMutationEnum.loadCategorySuccess, responseModel);
+        } catch (error) {
+            console.log(`error`, error);
+        }
+    },
+};

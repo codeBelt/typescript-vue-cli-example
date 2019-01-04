@@ -12,10 +12,11 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import {SwapiAction, SwapiActionEnum, SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiModule';
 import ICategoryMenu from '@/stores/swapi/models/home/ICategoryMenu';
 import CategoryEnum from '@/constants/CategoryEnum';
 import classNames from 'classnames';
+import {SwapiAction, SwapiActionEnum} from '@/stores/swapi/SwapiActionModule';
+import {SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiGetterModule';
 
 @Component
 export default class CategoryMenu extends Vue {
@@ -24,7 +25,6 @@ export default class CategoryMenu extends Vue {
     @SwapiAction(SwapiActionEnum.loadCategories) loadCategories;
 
     cssClasses(item: ICategoryMenu): string {
-        // console.log(`item`, item);
         return classNames({
             'pure-button': true,
             'pure-button-active': item.isActive,
@@ -32,8 +32,9 @@ export default class CategoryMenu extends Vue {
     }
 
     public onClickMenu = (event: MouseEvent): void => {
-        const category: CategoryEnum = (event.target as HTMLLIElement).getAttribute('data-category') as CategoryEnum;
-        const apiEndpoint: string = (event.target as HTMLLIElement).getAttribute('data-endpoint');
+        const target: HTMLLIElement = event.target as HTMLLIElement;
+        const category: CategoryEnum = target.getAttribute('data-category') as CategoryEnum;
+        const apiEndpoint: string = target.getAttribute('data-endpoint');
 
         this.loadCategories({
             apiEndpoint,
