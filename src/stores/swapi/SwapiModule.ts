@@ -2,9 +2,9 @@ import {Module} from 'vuex';
 import ISwapiState from '@/stores/swapi/models/actions/ISwapiState';
 import IRootState from '@/stores/IRootState';
 import CategoryEnum from '@/constants/CategoryEnum';
-import {swapiGetterModule} from '@/stores/swapi/SwapiGetterModule';
-import {swapiActionModule} from '@/stores/swapi/SwapiActionModule';
-import {swapiMutationModule} from '@/stores/swapi/SwapiMutationModule';
+import {swapiModuleGetter} from '@/stores/swapi/SwapiModuleGetter';
+import {swapiModuleAction} from '@/stores/swapi/SwapiModuleAction';
+import {swapiModuleMutation} from '@/stores/swapi/SwapiModuleMutation';
 
 export const swapiModule: Module<ISwapiState, IRootState> = {
     state: {
@@ -20,8 +20,8 @@ export const swapiModule: Module<ISwapiState, IRootState> = {
         [CategoryEnum.Species]: null,
         [CategoryEnum.Films]: null,
     },
-    getters: swapiGetterModule,
-    mutations: swapiMutationModule,
-    actions: swapiActionModule,
+    getters: swapiModuleGetter,
+    mutations: swapiModuleMutation,
+    actions: swapiModuleAction,
     namespaced: true,
 };

@@ -14,7 +14,7 @@ export enum SwapiGetterEnum {
     menuItems = 'menuItems',
 }
 
-export const swapiGetterModule: GetterTree<ISwapiState, IRootState> = {
+export const swapiModuleGetter: GetterTree<ISwapiState, IRootState> = {
     [SwapiGetterEnum.categories]: (state, getters, rootState) => state.categories,
     [SwapiGetterEnum.currentCategory]: (state, getters, rootState) => state.currentCategory,
     [SwapiGetterEnum.menuItems]: (state, getters, rootState): ICategoryMenu[] => {

@@ -16,7 +16,7 @@ export enum SwapiMutationEnum {
     loadCategorySuccess = 'loadCategorySuccess',
 }
 
-export const swapiMutationModule: MutationTree<ISwapiState> = {
+export const swapiModuleMutation: MutationTree<ISwapiState> = {
     [SwapiMutationEnum.loadCategoriesSuccess](state: ISwapiState, payload: ICategoriesResponse) {
         state.categories = payload;
     },

@@ -6,7 +6,7 @@ import ICategoriesResponse from '@/stores/swapi/models/actions/ICategoriesRespon
 import SwapiService from '@/stores/swapi/SwapiService';
 import ICategoryRequest from '@/stores/swapi/models/actions/ICategoryRequest';
 import CategoryResponseModel, {SwapiModelUnion} from '@/stores/swapi/models/actions/CategoryResponseModel';
-import {SwapiMutationEnum} from '@/stores/swapi/SwapiMutationModule';
+import {SwapiMutationEnum} from '@/stores/swapi/SwapiModuleMutation';
 
 export const SwapiAction = namespace('swapiModule').Action;
 
@@ -15,7 +15,7 @@ export enum SwapiActionEnum {
     loadCategory = 'setCurrentCategory',
 }
 
-export const swapiActionModule: ActionTree<ISwapiState, IRootState> = {
+export const swapiModuleAction: ActionTree<ISwapiState, IRootState> = {
     async [SwapiActionEnum.loadCategories](context: ActionContext<ISwapiState, IRootState>, payload: void) {
         try {
             const responseModel: ICategoriesResponse = await SwapiService.loadCategories();
