@@ -1,18 +1,30 @@
 <template>
-    <div class="hello">
-        <h1>{{ msg }}</h1>
-        {{ categories }}
+    <div class="homeLayout">
+        <article class="homeLayout-content">
+            <div v-if="!currentCategory">Select a category</div>
+            <div v-else="currentCategory">CategoryDisplay</div>
+        </article>
+        <aside class="homeLayout-links"><CategoryMenu /></aside>
+        <aside class="homeLayout-info">Ads</aside>
+        <footer class="homeLayout-footer">Footer</footer>
     </div>
 </template>
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import {SwapiAction, SwapiActionEnum, SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiModule';
+import CategoryMenu from '@/viewcomponents/components/CategoryMenu.vue';
 
-@Component
+@Component({
+    components: {
+        CategoryMenu,
+    },
+})
 export default class HomeLayout extends Vue {
-    @SwapiAction(SwapiActionEnum.LoadCategories) loadCategories;
     @SwapiGetter(SwapiGetterEnum.categories) categories;
+    @SwapiGetter(SwapiGetterEnum.currentCategory) currentCategory;
+
+    @SwapiAction(SwapiActionEnum.loadCategories) loadCategories;
 
     @Prop(String) private msg!: string;
 
@@ -24,20 +36,4 @@ export default class HomeLayout extends Vue {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-    margin: 40px 0 0;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-a {
-    color: #42b983;
-}
-</style>
+<style scoped lang="scss"></style>

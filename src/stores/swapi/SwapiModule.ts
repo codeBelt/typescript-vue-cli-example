@@ -5,6 +5,14 @@ import CategoryEnum from '@/constants/CategoryEnum';
 import IRootState from '@/stores/IRootState';
 import ICategoriesResponse from '@/stores/swapi/models/ICategoriesResponse';
 import SwapiService from '@/stores/swapi/SwapiService';
+import StringUtility from '@/utilities/StringUtility';
+import ICategoryMenu from '@/stores/swapi/models/home/ICategoryMenu';
+import ICategoryRequest from '@/stores/swapi/models/ICategoryRequest';
+import CategoryResponseModel, {SwapiModelUnion} from '@/stores/swapi/models/CategoryResponseModel';
+import IEntityState from '@/models/IEntityState';
+import get from 'lodash/get';
+import groupBy from 'lodash/groupBy';
+import EntityUtility from '@/utilities/EntityUtility';
 
 // Store
 // export interface RootState {
@@ -24,13 +32,18 @@ import SwapiService from '@/stores/swapi/SwapiService';
 // }
 
 export enum SwapiActionEnum {
-    LoadCategories = 'loadCategories',
+    loadCategories = 'loadCategories',
+    loadCategory = 'setCurrentCategory',
 }
 export enum SwapiGetterEnum {
     categories = 'categories',
+    currentCategory = 'currentCategory',
+    menuItems = 'menuItems',
 }
 export enum SwapiMutationEnum {
-    LoadCategoriesSuccess = 'loadCategoriesSuccess',
+    loadCategoriesSuccess = 'loadCategoriesSuccess',
+    loadCategory = 'loadCategory',
+    loadCategorySuccess = 'loadCategorySuccess',
 }
 
 const swapiState: ISwapiState = {
@@ -49,21 +62,66 @@ const swapiState: ISwapiState = {
 
 const swapiGetters: GetterTree<ISwapiState, IRootState> = {
     [SwapiGetterEnum.categories]: (state, getters, rootState) => state.categories,
+    [SwapiGetterEnum.currentCategory]: (state, getters, rootState) => state.currentCategory,
+    [SwapiGetterEnum.menuItems]: (state, getters, rootState): ICategoryMenu[] => {
+        if (state.categories === null) {
+            return [];
+        }
+        console.log(`state`, state);
+        return Object.keys(state.categories).map((key: string) => {
+            return {
+                isActive: key === state.currentCategory,
+                label: StringUtility.toTitleCase(key),
+                category: key as CategoryEnum,
+                apiEndpoint: state.categories[key],
+            };
+        });
+    },
 };
 
 const swapiMutations: MutationTree<ISwapiState> = {
-    [SwapiMutationEnum.LoadCategoriesSuccess](state: ISwapiState, payload: ICategoriesResponse) {
+    [SwapiMutationEnum.loadCategoriesSuccess](state: ISwapiState, payload: ICategoriesResponse) {
         state.categories = payload;
+    },
+    [SwapiMutationEnum.loadCategory](state: ISwapiState, payload: ICategoryRequest) {
+        console.log(`payload`, payload);
+        state.currentCategory = payload.category;
+        state.isLoadingCategory = true;
+    },
+    [SwapiMutationEnum.loadCategorySuccess](state: ISwapiState, payload: CategoryResponseModel<SwapiModelUnion>) {
+        const model = payload;
+        const currentEntity: IEntityState<SwapiModelUnion> = get(state[model.category], 'entity', null);
+        const entity: IEntityState<SwapiModelUnion> = EntityUtility.add(model.results, 'id', currentEntity);
+
+        state.isLoadingCategory = false;
+        state[model.category] = {
+            totalCount: model.count,
+            loadMoreUrl: model.next,
+            entity,
+        };
     },
 };
 
 const swapiActions: ActionTree<ISwapiState, IRootState> = {
-    async [SwapiActionEnum.LoadCategories](context: ActionContext<ISwapiState, IRootState>, payload: void) {
+    async [SwapiActionEnum.loadCategories](context: ActionContext<ISwapiState, IRootState>, payload: void) {
         try {
             const responseModel: ICategoriesResponse = await SwapiService.loadCategories();
 
-            context.commit(SwapiMutationEnum.LoadCategoriesSuccess, responseModel);
+            context.commit(SwapiMutationEnum.loadCategoriesSuccess, responseModel);
             // context.commit(SwapiAction.loadCategoriesSuccess(responseModel));
+        } catch (error) {
+            console.log(`error`, error);
+        }
+    },
+    async [SwapiActionEnum.loadCategory](context: ActionContext<ISwapiState, IRootState>, payload: ICategoryRequest) {
+        const {category, apiEndpoint} = payload;
+
+        context.commit(SwapiMutationEnum.loadCategory, payload);
+
+        try {
+            const responseModel: CategoryResponseModel<SwapiModelUnion> = await SwapiService.loadCategory(apiEndpoint, category);
+
+            context.commit(SwapiMutationEnum.loadCategorySuccess, responseModel);
         } catch (error) {
             console.log(`error`, error);
         }
