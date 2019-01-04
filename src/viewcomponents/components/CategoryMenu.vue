@@ -15,8 +15,9 @@ import {Component, Vue} from 'vue-property-decorator';
 import ICategoryMenu from '@/stores/swapi/models/getters/ICategoryMenu';
 import CategoryEnum from '@/constants/CategoryEnum';
 import classNames from 'classnames';
-import {SwapiAction, SwapiActionEnum} from '@/stores/swapi/SwapiModuleAction';
-import {SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
+import {SwapiActionEnum} from '@/stores/swapi/SwapiModuleAction';
+import {SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
+import {SwapiAction, SwapiGetter} from '@/stores/swapi/SwapiModule';
 
 @Component
 export default class CategoryMenu extends Vue {

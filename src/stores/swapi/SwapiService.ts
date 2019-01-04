@@ -7,7 +7,7 @@ import SwapiUtility from '@/utilities/SwapiUtility';
 import CategoryEnum from '@/constants/CategoryEnum';
 import environment from 'environment';
 import IDetailsRequest from '@/stores/swapi/models/actions/IDetailsRequest';
-console.log(`environment`, environment);
+
 export default class SwapiService {
     private static _http: HttpUtility = new HttpUtility();
 

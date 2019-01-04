@@ -13,8 +13,9 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import CategoryMenu from '@/viewcomponents/components/CategoryMenu.vue';
-import {SwapiAction, SwapiActionEnum} from '@/stores/swapi/SwapiModuleAction';
-import {SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
+import {SwapiActionEnum} from '@/stores/swapi/SwapiModuleAction';
+import {SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
+import {SwapiAction, SwapiGetter} from '@/stores/swapi/SwapiModule';
 
 @Component({
     components: {
@@ -22,15 +23,12 @@ import {SwapiGetter, SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
     },
 })
 export default class HomeLayout extends Vue {
-    @SwapiGetter(SwapiGetterEnum.categories) categories;
     @SwapiGetter(SwapiGetterEnum.currentCategory) currentCategory;
 
     @SwapiAction(SwapiActionEnum.loadCategories) loadCategories;
 
     mounted() {
         this.loadCategories();
-
-        console.log(`this.categories`, this.categories);
     }
 }
 </script>

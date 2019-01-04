@@ -34,13 +34,15 @@ export default class HttpUtility {
         if (hasTimestampExpired) {
             const response: AxiosResponse = await this.get(endpoint);
 
-            await this._cacheService.set(cacheKey, {
-                data: response.data,
-                status: response.status,
-                statusText: 'from local cache',
-                headers: null,
-                config: null,
-            });
+            if (response.data) {
+                await this._cacheService.set(cacheKey, {
+                    data: response.data,
+                    status: response.status,
+                    statusText: 'from local cache',
+                    headers: null,
+                    config: null,
+                });
+            }
 
             return response;
         }

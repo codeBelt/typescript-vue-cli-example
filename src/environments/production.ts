@@ -13,7 +13,6 @@ export default {
         species: 'https://swapi.co/api/species/',
         vehicles: 'https://swapi.co/api/vehicles/',
         starships: 'https://swapi.co/api/starships/',
-        topics: '/data/content.json',
     },
     isProduction: true,
     isDevelopment: false,

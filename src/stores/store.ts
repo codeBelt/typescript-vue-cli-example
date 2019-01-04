@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import {swapiModule} from '@/stores/swapi/SwapiModule';
+import {swapiModule, swapiNamespace} from '@/stores/swapi/SwapiModule';
 import IRootState from '@/stores/IRootState';
 
 Vue.use(Vuex);
@@ -12,7 +12,7 @@ export default new Vuex.Store<IRootState>({
     strict: true,
     plugins: [],
     modules: {
-        swapiModule,
+        [swapiNamespace]: swapiModule,
     },
 });
 

@@ -1,5 +1,4 @@
 import {MutationTree} from 'vuex';
-import {namespace} from 'vuex-class';
 import ISwapiState from '@/stores/swapi/models/actions/ISwapiState';
 import ICategoriesResponse from '@/stores/swapi/models/actions/ICategoriesResponse';
 import ICategoryRequest from '@/stores/swapi/models/actions/ICategoryRequest';
@@ -7,8 +6,6 @@ import CategoryResponseModel, {SwapiModelUnion} from '@/stores/swapi/models/acti
 import IEntityState from '@/models/IEntityState';
 import get from 'lodash/get';
 import EntityUtility from '@/utilities/EntityUtility';
-
-export const SwapiMutation = namespace('swapiModule').Mutation;
 
 export enum SwapiMutationEnum {
     loadCategoriesSuccess = 'loadCategoriesSuccess',
