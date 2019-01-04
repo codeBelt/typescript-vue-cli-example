@@ -14,7 +14,7 @@ export default class HomeLayout extends Vue {
     @SwapiAction(SwapiActionEnum.LoadCategories) loadCategories;
     @SwapiGetter(SwapiGetterEnum.categories) categories;
 
-    @Prop() private msg!: string;
+    @Prop(String) private msg!: string;
 
     mounted() {
         this.loadCategories();
