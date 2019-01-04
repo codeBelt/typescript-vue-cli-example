@@ -1,11 +1,11 @@
 import {ActionTree, ActionContext} from 'vuex';
 import {namespace} from 'vuex-class';
-import ISwapiState from '@/stores/swapi/models/ISwapiState';
+import ISwapiState from '@/stores/swapi/models/actions/ISwapiState';
 import IRootState from '@/stores/IRootState';
-import ICategoriesResponse from '@/stores/swapi/models/ICategoriesResponse';
+import ICategoriesResponse from '@/stores/swapi/models/actions/ICategoriesResponse';
 import SwapiService from '@/stores/swapi/SwapiService';
-import ICategoryRequest from '@/stores/swapi/models/ICategoryRequest';
-import CategoryResponseModel, {SwapiModelUnion} from '@/stores/swapi/models/CategoryResponseModel';
+import ICategoryRequest from '@/stores/swapi/models/actions/ICategoryRequest';
+import CategoryResponseModel, {SwapiModelUnion} from '@/stores/swapi/models/actions/CategoryResponseModel';
 import {SwapiMutationEnum} from '@/stores/swapi/SwapiMutationModule';
 
 export const SwapiAction = namespace('swapiModule').Action;

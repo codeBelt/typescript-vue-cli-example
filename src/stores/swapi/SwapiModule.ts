@@ -1,5 +1,5 @@
 import {Module} from 'vuex';
-import ISwapiState from '@/stores/swapi/models/ISwapiState';
+import ISwapiState from '@/stores/swapi/models/actions/ISwapiState';
 import IRootState from '@/stores/IRootState';
 import CategoryEnum from '@/constants/CategoryEnum';
 import {swapiGetterModule} from '@/stores/swapi/SwapiGetterModule';

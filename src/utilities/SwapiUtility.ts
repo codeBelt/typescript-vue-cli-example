@@ -1,16 +1,16 @@
 import CategoryEnum from '@/constants/CategoryEnum';
-import {SwapiModelUnion} from '@/stores/swapi/models/CategoryResponseModel';
+import {SwapiModelUnion} from '@/stores/swapi/models/actions/CategoryResponseModel';
 import IConstructor from '@/models/IConstructor';
-import PersonModel from '@/stores/swapi/models/PersonModel';
-import PlanetModel from '@/stores/swapi/models/PlanetModel';
-import StarshipModel from '@/stores/swapi/models/StarshipModel';
-import VehicleModel from '@/stores/swapi/models/VehicleModel';
-import SpeciesModel from '@/stores/swapi/models/SpeciesModel';
-import FilmModel from '@/stores/swapi/models/FilmModel';
-import ISwapiState from '@/stores/swapi/models/ISwapiState';
+import PersonModel from '@/stores/swapi/models/actions/PersonModel';
+import PlanetModel from '@/stores/swapi/models/actions/PlanetModel';
+import StarshipModel from '@/stores/swapi/models/actions/StarshipModel';
+import VehicleModel from '@/stores/swapi/models/actions/VehicleModel';
+import SpeciesModel from '@/stores/swapi/models/actions/SpeciesModel';
+import FilmModel from '@/stores/swapi/models/actions/FilmModel';
+import ISwapiState from '@/stores/swapi/models/actions/ISwapiState';
 import get from 'lodash/get';
-import INeededCategoryIds from '@/stores/swapi/models/INeededCategoryIds';
-import IDetailsRequest from '@/stores/swapi/models/IDetailsRequest';
+import INeededCategoryIds from '@/stores/swapi/models/actions/INeededCategoryIds';
+import IDetailsRequest from '@/stores/swapi/models/actions/IDetailsRequest';
 
 export default class SwapiUtility {
     /**

@@ -1,10 +1,10 @@
 import {GetterTree} from 'vuex';
 import {namespace} from 'vuex-class';
-import ISwapiState from '@/stores/swapi/models/ISwapiState';
+import ISwapiState from '@/stores/swapi/models/actions/ISwapiState';
 import CategoryEnum from '@/constants/CategoryEnum';
 import StringUtility from '@/utilities/StringUtility';
 import IRootState from '@/stores/IRootState';
-import ICategoryMenu from '@/stores/swapi/models/home/ICategoryMenu';
+import ICategoryMenu from '@/stores/swapi/models/getters/ICategoryMenu';
 
 export const SwapiGetter = namespace('swapiModule').Getter;
 

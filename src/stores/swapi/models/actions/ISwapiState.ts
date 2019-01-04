@@ -1,6 +1,6 @@
-import ICategoriesResponse from '@/stores/swapi/models/ICategoriesResponse';
 import CategoryEnum from '@/constants/CategoryEnum';
-import ILoadMoreEntity from '@/stores/swapi/models/ILoadMoreEntity';
+import ILoadMoreEntity from '@/stores/swapi/models/actions/ILoadMoreEntity';
+import ICategoriesResponse from '@/stores/swapi/models/actions/ICategoriesResponse';
 
 export default interface ISwapiState {
     [CategoryEnum.People]: ILoadMoreEntity;

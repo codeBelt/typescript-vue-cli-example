@@ -1,7 +1,7 @@
 import HttpUtility from '@/utilities/HttpUtility';
 import {AxiosResponse} from 'axios';
-import ICategoriesResponse from '@/stores/swapi/models/ICategoriesResponse';
-import CategoryResponseModel, {SwapiModelUnion} from '@/stores/swapi/models/CategoryResponseModel';
+import ICategoriesResponse from '@/stores/swapi/models/actions/ICategoriesResponse';
+import CategoryResponseModel, {SwapiModelUnion} from '@/stores/swapi/models/actions/CategoryResponseModel';
 import IConstructor from '@/models/IConstructor';
 import SwapiUtility from '@/utilities/SwapiUtility';
 import CategoryEnum from '@/constants/CategoryEnum';

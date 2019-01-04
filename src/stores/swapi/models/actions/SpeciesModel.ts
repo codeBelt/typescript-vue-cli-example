@@ -1,7 +1,7 @@
 import {BaseModel} from 'sjs-base-model';
-import SwapiUtility from '@/utilities/SwapiUtility';
 import CategoryEnum from '@/constants/CategoryEnum';
-import INeededCategoryIds from '@/stores/swapi/models/INeededCategoryIds';
+import SwapiUtility from '@/utilities/SwapiUtility';
+import INeededCategoryIds from '@/stores/swapi/models/actions/INeededCategoryIds';
 
 /*
     // Returned Api Data Sample

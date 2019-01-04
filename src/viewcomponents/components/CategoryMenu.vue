@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import ICategoryMenu from '@/stores/swapi/models/home/ICategoryMenu';
+import ICategoryMenu from '@/stores/swapi/models/getters/ICategoryMenu';
 import CategoryEnum from '@/constants/CategoryEnum';
 import classNames from 'classnames';
 import {SwapiAction, SwapiActionEnum} from '@/stores/swapi/SwapiActionModule';

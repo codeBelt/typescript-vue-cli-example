@@ -1,5 +1,5 @@
 import CategoryEnum from '@/constants/CategoryEnum';
-import ICategoryDisplayItem from '@/stores/swapi/models/home/ICategoryDisplayItem';
+import ICategoryDisplayItem from '@/stores/swapi/models/getters/ICategoryDisplayItem';
 
 export default interface ICategoryViewData {
     readonly displayCount: string;
