@@ -29,7 +29,7 @@ export default class HomeLayout extends Vue {
 
     @SwapiAction(SwapiActionEnum.loadCategories) loadCategories;
 
-    mounted() {
+    mounted(): void {
         this.loadCategories();
     }
 }

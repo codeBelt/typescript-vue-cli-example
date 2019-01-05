@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header />
-        <HomeLayout msg="Welcome to Your Vue.js + TypeScript App" />
+        <HomeLayout />
     </div>
 </template>
 

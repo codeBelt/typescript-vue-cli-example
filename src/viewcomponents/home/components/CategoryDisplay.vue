@@ -41,7 +41,7 @@ export default class CategoryDisplay extends Vue {
     @SwapiGetter(SwapiGetterEnum.categoryViewData) categoryViewData;
     @SwapiGetter(SwapiGetterEnum.isLoadingCategory) isLoadingCategory;
 
-    public onClickItem = (event: MouseEvent) => {
+    onClickItem = (event: MouseEvent): void => {
         // const category: CategoryEnum = event.currentTarget.getAttribute('data-category') as CategoryEnum;
         // const itemId: string = event.currentTarget.getAttribute('data-item-id');
         //
@@ -57,7 +57,7 @@ export default class CategoryDisplay extends Vue {
         //     this.props.dispatch(ModalAction.addModal(modal));
     };
 
-    public onClickLoadMore = (event: MouseEvent) => {
+    onClickLoadMore = (event: MouseEvent): void => {
         // const category: CategoryEnum = event.currentTarget.getAttribute('data-category') as CategoryEnum;
         // const apiEndpoint: string = event.currentTarget.getAttribute('data-load-more-endpoint');
         //
