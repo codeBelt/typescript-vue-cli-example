@@ -12,12 +12,12 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import ICategoryMenu from '@/stores/swapi/models/getters/ICategoryMenu';
-import CategoryEnum from '@/constants/CategoryEnum';
 import classNames from 'classnames';
-import {SwapiActionEnum} from '@/stores/swapi/SwapiModuleAction';
-import {SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
 import {SwapiAction, SwapiGetter} from '@/stores/swapi/SwapiModule';
+import {SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
+import CategoryEnum from '@/constants/CategoryEnum';
+import ICategoryMenu from '@/stores/swapi/models/getters/ICategoryMenu';
+import {SwapiActionEnum} from '@/stores/swapi/SwapiModuleAction';
 
 @Component
 export default class CategoryMenu extends Vue {
