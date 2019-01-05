@@ -8,7 +8,7 @@
                 :key="item.label"
                 :data-category="item.category"
                 :data-item-id="item.id"
-                onclick="onClickItem"
+                @click="onClickItem"
             >
                 <CategoryItem :item="item" />
             </li>
@@ -18,7 +18,7 @@
             type="button"
             :data-load-more-endpoint="categoryViewData.loadMoreUrl"
             :data-category="categoryViewData.category"
-            onclick="onClickLoadMore"
+            @click="onClickLoadMore"
         >
             Load More
         </button>
@@ -29,8 +29,10 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import {SwapiGetterEnum} from '@/stores/swapi/SwapiModuleGetter';
-import {SwapiGetter} from '@/stores/swapi/SwapiModule';
+import {SwapiAction, SwapiGetter} from '@/stores/swapi/SwapiModule';
 import CategoryItem from '@/viewcomponents/home/components/CategoryItem.vue';
+import CategoryEnum from '@/constants/CategoryEnum';
+import {SwapiActionEnum} from '@/stores/swapi/SwapiModuleAction';
 
 @Component({
     components: {
@@ -40,6 +42,8 @@ import CategoryItem from '@/viewcomponents/home/components/CategoryItem.vue';
 export default class CategoryDisplay extends Vue {
     @SwapiGetter(SwapiGetterEnum.categoryViewData) categoryViewData;
     @SwapiGetter(SwapiGetterEnum.isLoadingCategory) isLoadingCategory;
+
+    @SwapiAction(SwapiActionEnum.loadCategory) loadCategory;
 
     onClickItem = (event: MouseEvent): void => {
         // const category: CategoryEnum = event.currentTarget.getAttribute('data-category') as CategoryEnum;
@@ -58,13 +62,14 @@ export default class CategoryDisplay extends Vue {
     };
 
     onClickLoadMore = (event: MouseEvent): void => {
-        // const category: CategoryEnum = event.currentTarget.getAttribute('data-category') as CategoryEnum;
-        // const apiEndpoint: string = event.currentTarget.getAttribute('data-load-more-endpoint');
-        //
-        // this.props.dispatch(SwapiAction.loadCategory({
-        //     apiEndpoint,
-        //     category,
-        // }));
+        const target: HTMLLIElement = event.target as HTMLLIElement;
+        const category: CategoryEnum = target.getAttribute('data-category') as CategoryEnum;
+        const apiEndpoint: string = target.getAttribute('data-load-more-endpoint');
+
+        this.loadCategory({
+            apiEndpoint,
+            category,
+        });
     };
 }
 </script>
