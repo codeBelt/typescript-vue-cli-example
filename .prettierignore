@@ -18,5 +18,5 @@
  dist
  LICENSE
  node_modules
- tools/templates/*
+tools/templates
  webpack.config.js
