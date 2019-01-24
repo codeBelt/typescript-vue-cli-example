@@ -9,7 +9,7 @@ import {SwapiMutationEnum} from '@/stores/swapi/SwapiModuleMutation';
 
 export enum SwapiActionEnum {
     loadCategories = 'loadCategories',
-    loadCategory = 'setCurrentCategory',
+    loadCategory = 'loadCategory',
 }
 
 export const swapiModuleAction: ActionTree<ISwapiState, IRootState> = {
